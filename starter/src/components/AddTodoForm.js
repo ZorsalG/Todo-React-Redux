@@ -5,6 +5,7 @@ import { addTodoAsync } from '../redux/todoSlice';
 const AddTodoForm = () => {
 	const [value, setValue] = useState('');
 
+	//WE WANT TO DISPATCH THE ADDTODO ACTION
 	const dispatch = useDispatch();
 
 	const onSubmit = (event) => {

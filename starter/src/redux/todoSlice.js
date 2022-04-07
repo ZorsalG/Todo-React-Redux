@@ -27,6 +27,7 @@ export const addTodoAsync = createAsyncThunk(
     }
   }
 );
+
 export const toggleCompleteAsync = createAsyncThunk(
   "todos/completeTodoAsync",
   async (payload) => {
@@ -43,14 +44,18 @@ export const toggleCompleteAsync = createAsyncThunk(
     }
   }
 );
+
 const todoSlice = createSlice({
+  // THE CREATESLICE FUNCTION CREATES ACTIONS BASED ON THE REDUCER NAMES
   name: "todos",
-  initialState: [
-    { id: 1, title: "todo1", completed: false },
-    { id: 2, title: "todo2", completed: false },
-    { id: 3, title: "todo3", completed: true },
-  ],
+  initialState: [],
+
   reducers: {
+    // RESPONDS TO THE ACTION, TAKES THE CURRENT STATE, AND CREATES NEW STATE BASED ON THE ACTION PAYLOAD
+
+    // THE STATE IS THE CURRENT STATE OF THIS SLICE, AND THE ACTION CONTAINS THE TYPE AND THE PAYLOAD
+
+    //WHEN WE DISPATCH THE ADDTODO ACTION, THIS IS THE REDUCER THAT HANDLES THAT ACTION
     addTodo: (state, action) => {
       const newTodo = {
         id: Date.now(),
@@ -58,13 +63,17 @@ const todoSlice = createSlice({
         completed: false,
       };
       state.push(newTodo);
+      // REDUX WILL TAKE THIS NEW STATE AND UPDATE THE STORE
     },
+    // CHECK DONE
     toggleComplete: (state, action) => {
+      //WILL PASS AND ID AS PART OF THE ACTION PAYLOAD
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].completed = action.payload.completed;
     },
     deleteTodo: (state, action) => {
       return state.filter((todo) => todo.id !== action.payload.id);
+      // RETURN BECAUSE GIVE A NEW ARRAY
     },
   },
   extraReducers: {

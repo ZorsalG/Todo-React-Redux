@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import todoReducer from './todoSlice';
 
 export default configureStore({
@@ -6,3 +6,4 @@ export default configureStore({
     todos: todoReducer,
   }
 })
+// CREATE THE STORE, HOLD STATE AND COMBINE THE REDUCERS

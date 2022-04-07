@@ -5,12 +5,13 @@ import { toggleCompleteAsync, deleteTodo } from '../redux/todoSlice';
 const TodoItem = ({ id, title, completed }) => {
 	const dispatch = useDispatch();
 
+	//DISPATCH THE ACTION
 	const handleCompleteClick = () => {
 		dispatch(toggleCompleteAsync({ id: id, completed: !completed }))
 	}
 
-	const handleDeleteCLick = () => {
-		dispatch(deleteTodo({id: id}));
+	const handleDeleteClick = () => {
+		dispatch(deleteTodo({ id: id }));
 	};
 
 	return (
@@ -20,7 +21,7 @@ const TodoItem = ({ id, title, completed }) => {
 					<input type='checkbox' className='mr-3' checked={completed} onChange={handleCompleteClick}></input>
 					{title}
 				</span>
-				<button onClick={handleDeleteCLick} className='btn btn-danger'>Delete</button>
+				<button onClick={handleDeleteClick} className='btn btn-danger'>Delete</button>
 			</div>
 		</li>
 	);
