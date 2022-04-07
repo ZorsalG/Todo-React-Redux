@@ -5,7 +5,7 @@ import { getTodosAsync } from '../redux/todoSlice';
 
 const TodoList = () => {
 	const dispatch = useDispatch();
-	//DISPLAY THE TODO LIST | USESELECTOR HOOK
+	// DISPLAY THE TODO LIST | USESELECTOR HOOK
 	// THIS GO TO THE STORE, PICK ALL THE TODOS FROM STATE, AND ASSIGN THIS TO THE TODOS VARIABLE (FROM TODOSLICE)
 	const todos = useSelector((state) => state.todos);
 

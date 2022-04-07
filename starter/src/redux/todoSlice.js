@@ -45,6 +45,19 @@ export const toggleCompleteAsync = createAsyncThunk(
   }
 );
 
+export const deleteTodoAsync = createAsyncThunk(
+	'todos/deleteTodoAsync',
+	async (payload) => {
+		const response = await fetch(`http://localhost:7000/todos/${payload.id}`, {
+			method: 'DELETE',
+		});
+
+		if (response.ok) {
+			return { id: payload.id };
+		}
+	}
+);
+
 const todoSlice = createSlice({
   // THE CREATESLICE FUNCTION CREATES ACTIONS BASED ON THE REDUCER NAMES
   name: "todos",
@@ -72,16 +85,12 @@ const todoSlice = createSlice({
       state[index].completed = action.payload.completed;
     },
     deleteTodo: (state, action) => {
-      return state.filter((todo) => todo.id !== action.payload.id);
       // RETURN BECAUSE GIVE A NEW ARRAY
+      return state.filter((todo) => todo.id !== action.payload.id);
     },
   },
   extraReducers: {
-    [getTodosAsync.pending]: (state, action) => {
-      console.log("fetching data....");
-    },
     [getTodosAsync.fulfilled]: (state, action) => {
-      console.log("fetched data");
       return action.payload.todos;
     },
     [addTodoAsync.fulfilled]: (state, action) => {
@@ -91,6 +100,9 @@ const todoSlice = createSlice({
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       state[index].completed = action.payload.completed;
     },
+    [deleteTodoAsync.fulfilled]: (state, action) => {
+			return state.filter((todo) => todo.id !== action.payload.id);
+		},
   },
 });
 
